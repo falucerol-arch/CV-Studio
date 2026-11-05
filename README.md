@@ -11,6 +11,14 @@ npm run dev
 
 Abre la URL local que muestra Vite. Los CV se guardan en LocalStorage del navegador.
 
+## Publicar en GitHub Pages
+
+El workflow `.github/workflows/deploy.yml` instala dependencias con `npm ci`, compila la aplicación y publica `dist` cuando hay un push a `main` (también se puede iniciar manualmente desde Actions). En GitHub, abre **Settings → Pages** y selecciona **GitHub Actions** como fuente de publicación.
+
+La aplicación pública estará en <https://falucerol-arch.github.io/CV-Studio/>. Vite utiliza `/CV-Studio/` como base en compilaciones de producción y mantiene `/` en desarrollo local, así que los recursos compilados cargan desde la ruta correcta del repositorio. La aplicación no usa rutas internas de página; la navegación del editor ocurre dentro de React.
+
+Los currículums se guardan en el LocalStorage de cada navegador y la descarga PDF se genera en el cliente. No se sincronizan entre usuarios ni navegadores. **Canva Connect** sí necesita el backend Node de `server/` y credenciales OAuth; GitHub Pages solo sirve archivos estáticos, por lo que ese backend debe alojarse aparte antes de habilitar Canva en producción.
+
 ## Formatos y plantillas
 
 - El adaptador JSON Resume 1.x importa y exporta el formato estándar. Los datos específicos de CV Studio viajan en `custom.cvStudio` para conservarlos al hacer un ciclo de exportación e importación.
