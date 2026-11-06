@@ -12,6 +12,9 @@ export function toJsonResume(cv) {
       title: cv.title,
       template: cv.template,
       customization: cv.customization || {},
+      photoOriginal: p.photo || '',
+      photoCrop: p.photoCrop || '',
+      photoShape: p.photoShape || 'circle',
       skills: cv.skills || { technical: [], soft: [], tools: [] },
       additional: cv.additional || '',
       volunteering: list(cv.volunteering),
@@ -21,7 +24,7 @@ export function toJsonResume(cv) {
   return {
     $schema: 'https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json',
     basics: {
-      name: p.name || '', label: p.role || '', image: p.photo || '', email: p.email || '', phone: p.phone || '',
+      name: p.name || '', label: p.role || '', image: p.photoCrop || p.photo || '', email: p.email || '', phone: p.phone || '',
       url: p.website || '', summary: p.summary || '', location: { address: p.address || '', city: p.location || '' },
       profiles: [p.linkedin && { network: 'LinkedIn', url: p.linkedin }, p.github && { network: 'GitHub', url: p.github }].filter(Boolean),
     },
@@ -50,7 +53,7 @@ export function fromJsonResume(resume) {
     id: globalThis.crypto?.randomUUID?.() || itemId(),
     title: cvCustom.title || b.name || 'CV importado', updated: new Date().toISOString(), template: cvCustom.template || 'professional',
     customization: cvCustom.customization || {},
-    personal: { name: b.name || '', role: b.label || '', email: b.email || '', phone: b.phone || '', address: b.location?.address || '', location: b.location?.city || b.location?.region || '', linkedin: profile('LinkedIn'), github: profile('GitHub'), website: b.url || '', summary: b.summary || '', photo: b.image || '' },
+    personal: { name: b.name || '', role: b.label || '', email: b.email || '', phone: b.phone || '', address: b.location?.address || '', location: b.location?.city || b.location?.region || '', linkedin: profile('LinkedIn'), github: profile('GitHub'), website: b.url || '', summary: b.summary || '', photo: cvCustom.photoOriginal || b.image || '', photoCrop: cvCustom.photoCrop || '', photoShape: cvCustom.photoShape || 'circle' },
     experience: list(resume.work).map(x => ({ id:itemId(), company:x.name || '', position:x.position || '', start:x.startDate || '', end:x.endDate || '', current:!x.endDate && !!x.startDate, description:x.summary || '', achievements:list(x.highlights).join('\n') })),
     education: list(resume.education).map(x => ({ id:itemId(), institution:x.institution || '', degree:x.studyType || x.area || '', start:x.startDate || '', end:x.endDate || '', status:x.endDate ? 'Graduado' : '', description:list(x.courses).join(', ') })),
     skills: cvCustom.skills || { technical:[], soft:[], tools:[] },

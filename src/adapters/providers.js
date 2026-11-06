@@ -8,10 +8,16 @@ export const templateProviders = {
     render: (cv, template, ReactPreview) => ReactPreview({ cv, template }),
     exportFormat:'pdf-react-pdf',
   },
+  'reactive-resume-adapted': {
+    id:'reactive-resume-adapted', name:'Adaptaciones Reactive Resume', format:'react-html',
+    render:(cv,template,ReactPreview)=>ReactPreview({cv,template}),
+    exportFormat:'pdf-react-pdf',
+  },
   'json-resume': {
     id:'json-resume', name:'JSON Resume', format:'json-resume-1.x',
     encode:toJsonResume, decode:fromJsonResume, render:renderJsonResumeHtml, renderFormat:'standalone-html', exportFormat:'pdf-react-pdf',
   },
 };
 
-export const getTemplateProvider = templateId => templateId === 'jsonresume-class' ? templateProviders['json-resume'] : templateProviders['cv-studio-local'];
+const reactiveResumeTemplates=['azurill','bronzor','chikorita','ditgar','ditto','gengar','glalie','kakuna','lapras','leafish','meowth','onyx','persian','pikachu','porygon','rhyhorn','scizor','smeargle'];
+export const getTemplateProvider = templateId => templateId === 'jsonresume-class' ? templateProviders['json-resume'] : reactiveResumeTemplates.includes(templateId) ? templateProviders['reactive-resume-adapted'] : templateProviders['cv-studio-local'];

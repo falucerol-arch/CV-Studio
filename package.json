@@ -3,16 +3,31 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "scripts": { "dev": "vite", "dev:api": "node --env-file-if-exists=.env server/index.js", "build": "vite build", "preview": "vite preview", "test": "node --test" },
+  "scripts": {
+    "dev": "vite",
+    "dev:api": "node --env-file-if-exists=.env server/index.js",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test"
+  },
   "dependencies": {
+    "@radix-ui/react-alert-dialog": "^1.2.1",
     "@react-pdf/renderer": "^4.3.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "docx": "^9.15.2",
     "lucide-react": "^0.468.0",
+    "mammoth": "^1.13.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.10.38",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.6.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "fake-indexeddb": "^6.2.7",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.16",
     "vite": "^6.0.5"

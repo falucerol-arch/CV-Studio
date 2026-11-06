@@ -25,7 +25,7 @@ test('imports JSON Resume and preserves standard plus CV Studio extension data',
 
 test('reports malformed JSON Resume sections and registers original local templates', () => {
   assert.deepEqual(validateJsonResume({work:{}}),['"work" debe ser una lista según JSON Resume.']);
-  assert.equal(TEMPLATE_REGISTRY.filter(x=>x.provider==='cv-studio-local').length,6);
+  assert.equal(TEMPLATE_REGISTRY.filter(x=>x.provider==='cv-studio-local').length,12);
   assert.ok(TEMPLATE_REGISTRY.every(x=>x.source&&x.license));
 });
 
